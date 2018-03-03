@@ -43,7 +43,7 @@ const RequestTable = (props) => {
                   <TableHeaderColumn>Solicitado em</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody deselectOnClickaway={false}>
               {requests.map(request => (
                 <TableRow key={request.id} selected={selectedRequestId === request.id}>
                   <TableRowColumn>{request.id}</TableRowColumn>

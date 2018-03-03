@@ -18,7 +18,7 @@ class DocumentRequestList extends Component {
     this.props.addAllRequests();
   }
 
-  onRowSelection = (tableSelect) => {
+  onRowSelection = (tableSelect) => {    
     if (tableSelect && tableSelect.length > 0) {
       const index = tableSelect[0];
       const {id} = this.props.requests.list[index];
