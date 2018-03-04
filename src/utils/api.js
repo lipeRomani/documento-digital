@@ -1,5 +1,8 @@
-import * as moment from 'moment';
+/**
+ * Foi adicionado tempo de loading para simular uma comunicação com uma api REST real
+ */
 
+import * as moment from 'moment';
 
 export const  getAllRequests = () => {
   return new Promise((resolve, reject) => {
