@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import RequestTable from '../components/RequestTable';
 import RequestTableMenu from '../components/RequestTableMenu';
+import LoadingCentered from '../components/LoadingCentered';
 import { 
   fetchAddAllRequests,
-  selectRequest
+  selectRequest,
+  createNewRequest,
 } from '../actions/requestsAction';
 import {
   openCreateRequestModal,
@@ -32,21 +34,31 @@ class DocumentRequestList extends Component {
     this.props.selectRequest(null);
   }
 
+  onSubmitNewRequest = (values) => {
+    this.props.closeCreateRequestModal();
+    this.props.createNewRequest(values);
+  }
+
   render() {
     const { requests } = this.props;
     return (
       <div>
         <Header />
-        <RequestTableMenu 
+        <RequestTableMenu
+          onSubmitNewRequest={this.onSubmitNewRequest}
           onOpenCreateRequestModal={this.props.openCreateRequestModal}
           onCloseCreateRequestModal={this.props.closeCreateRequestModal}
           isOpenCreateRequestModal={this.props.modal.isOpenCreateRequest}
           />
-        <RequestTable 
-          requests={requests.list} 
-          onRowSelection={this.onRowSelection} 
-          selectedRequestId={requests.selectedId}
-          onCloseDetailCard={this.onCloseDetailCard} />
+        {this.props.loading.isLoadingRequestList 
+          ? <LoadingCentered />
+          : <RequestTable 
+              requests={requests.list} 
+              onRowSelection={this.onRowSelection} 
+              selectedRequestId={requests.selectedId}
+              onCloseDetailCard={this.onCloseDetailCard} />
+        }
+        
       </div>
     )
   }
@@ -65,6 +77,7 @@ const mapDipatchToProps = (dispatch) => {
     selectRequest: (index) => dispatch(selectRequest(index)),
     openCreateRequestModal: () => dispatch(openCreateRequestModal()),
     closeCreateRequestModal: () => dispatch(closeCreateRequestModal()),
+    createNewRequest: (request) => dispatch(createNewRequest(request)),
   };
 }
 

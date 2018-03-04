@@ -1,16 +1,62 @@
+import * as moment from 'moment';
+
 
 export const  getAllRequests = () => {
   return new Promise((resolve, reject) => {
-    resolve(requests);
+    setTimeout(() => {
+      resolve(requests);
+    }, 2000);
   });
 }
+
+export const getAllCompanys = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(companys);
+    }, 1000)
+  });
+};
+
+export const getAllDocuments = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(documents);
+    }, 1000)
+  })
+};
+
+export const addNewRequest = (request) => {
+  return new Promise((resolve, reject) => {
+    request.id = (requests.length + 1);
+    request.requestDate = moment().format('DD/MM/YYYY HH:mm');
+    requests.push(request);
+    resolve(request);
+  });
+}
+
+const companys = [
+  'Empresa 1',
+  'Empresa 2',
+  'Empresa 3',
+  'Empresa 4',
+]
+
+const documents = [
+  'Certidão A',
+  'Certidão B',
+  'Certidão C',
+  'Certidão D',
+  'Certidão E',
+  'Certidão F',
+  'Certidão G',
+]
 
 const requests = [
   {
     id: 1,
-    requester: "Felipe",
-    requesterEmail: "felipearomani@gmail.com",
-    companyRequested: "Bart Digital",
+    requester: "Wolverine",
+    requesterEmail: "wolverine@gmail.com",
+    companyRequested: "Empresa 1",
     requestDate: "30/01/2018 16:30",
     documents: [
       "Certidão A",
@@ -21,9 +67,9 @@ const requests = [
   },
   {
     id: 2,
-    requester: "José",
-    requesterEmail: "jose@gmail.com",
-    companyRequested: "Bayer",
+    requester: "Iron Man",
+    requesterEmail: "iron_man@gmail.com",
+    companyRequested: "Empresa 4",
     requestDate: "20/02/2018 16:30",
     documents: [ 
       "Certidão A",
@@ -31,15 +77,13 @@ const requests = [
     ]
   },
   {
-    id: 345,
-    requester: "José",
-    requesterEmail: "jose@gmail.com",
-    companyRequested: "Bayer",
+    id: 3,
+    requester: "Black Panther",
+    requesterEmail: "black_panther@gmail.com",
+    companyRequested: "Empresa 2",
     requestDate: "20/02/2018 16:30",
     documents: [ 
       "Certidão H",
-      "Certidão O",
-      "Certidão W",
       "Certidão U",
       "Certidão X",
     ]
